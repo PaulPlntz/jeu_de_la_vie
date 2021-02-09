@@ -13,7 +13,7 @@ def test_creation_jeu():
 
 def test_initialisation_cellules():
     jeu_test_1 = jeu_vie.Jeu(10,10)
-    cellules_test_1 = [(0,0), (0,1), (1,0), (3,4), (0,9), (9,0), (9,9)]
+    cellules_test_1 = [(0,0), (0,1), (1,0), (3,4), (0,9), (9,0), (9,9), (3,4)]
     jeu_test_1.initialiser_Cellules(cellules_test_1)
     grille = jeu_test_1.matrice
     assert (grille[i][j] == 1 for (i,j) in cellules_test_1)
@@ -66,8 +66,8 @@ def test_updated_matrice():
 
 def main():
     print("Ce script sert à tester mon jeu.")
-    #test_creation_jeu()
-    #test_initialisation_cellules()
+    test_creation_jeu()
+    test_initialisation_cellules()
     test_nombre_voisins()
     test_updated_matrice()
     print("Pas d'erreur.")

@@ -1,3 +1,5 @@
+from ast import literal_eval
+
 class Jeu :
     # choix dans le code des cellules vivantes
     def initialiser_Cellules(self, liste_cellules):
@@ -57,28 +59,53 @@ class Jeu :
         self.matrice = self.get_Updated_Grille()
         self.nbIterations += 1
 
+
 def main() :
-    print("BIENVENUE DANS LE JEU DE LA VIE !")
+    print("\nBIENVENUE DANS LE JEU DE LA VIE !")
     input("\nAppuyez sur une touche pour commencer.")
-    notreJeu = Jeu(30,30)
-    #cellules_initiales = [(13,3),(13,4),(14,4),(15,4),(16,4),(16,5),(17,5)]
+
+    loopTailleGrille = True
+    while (loopTailleGrille):
+        try:
+            taille_grille = int(input("\nChoisir la taille (un entier) de la grille : "))
+            if (taille_grille <= 0):
+                print("La taille doit être strictement supérieure à 0.")
+            else:
+                loopTailleGrille = False
+                print("La taille a bien été initialisée et vaut "+str(taille_grille)+".\n")
+        except (TypeError, ValueError):
+            print("La taille doit être un entier supérieur à 0, veuillez réessayer.")
+    notreJeu = Jeu(taille_grille,taille_grille)
 
     cellules_initiales = []
-    loopInit = True
-    while (loopInit) :
-        strCell = input ("\nAjouter une nouvelle cellule vivante (ligne,colonne) :")
-        boolStrValide = False
-
+    #cellules_initiales = [(13,3),(13,4),(14,4),(15,4),(16,4),(16,5),(17,5)]
+    boolLoopInitCell = True
+    while (boolLoopInitCell) :
+        try:
+            strInput = input ("Insérer une cellule dans la grille au format '(i,j)', où i et j sont les coordonnées de ligne et de colonne de la cellule : ")
+            objInput = literal_eval(strInput)
+            if (type(objInput)==tuple and len(objInput)==2 and type(objInput[0])==int and type(objInput[1])==int):
+                if (objInput[0]<0 or objInput[0]>99 or objInput[1]<0 or objInput[1]>99):
+                    print("Les coordonnées d'une cellule doivent être compris entre 0 et "+str(taille_grille-1))
+                else :
+                    cellules_initiales.append(objInput)
+                    end = input("\nOn place une nouvelle cellule ? ('n' pour finir l'initialisation des cellules) \n")
+                    boolLoopInitCell = not(end == "n")
+            else :
+                print("Entrée invalide, mauvais format de cellule")
+        except (SyntaxError, ValueError, NameError, TypeError, ZeroDivisionError):
+            print("Entrée invalide, mauvais format de cellule")
     notreJeu.initialiser_Cellules(cellules_initiales)
+
     print("\nEtat initial du jeu :")
     notreJeu.afficher_Grille()
-    inpFin = input("\nOn continue ? ('n' pour finir) : ")
+    inpFin = input("\nOn continue ? ('n' pour finir le jeu) \n")
     end = (inpFin == 'n')
     while (not end) :
         print("\nIteration n°"+str(notreJeu.nbIterations)+" :")
         notreJeu.update_Grille()
         notreJeu.afficher_Grille()
-        inpFin = input("\nOn continue ? ('n' pour finir) : ")
+        inpFin = input("\nOn continue ? ('n' pour finir le jeu) \n")
         end = (inpFin == 'n')
 
 if __name__=='__main__' :
