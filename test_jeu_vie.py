@@ -64,13 +64,13 @@ def test_updated_matrice():
 
     assert(jeu_test_1.get_Updated_Grille() == grille2)
 
-def main():
-    print("Ce script sert à tester mon jeu.")
-    test_creation_jeu()
-    test_initialisation_cellules()
-    test_nombre_voisins()
-    test_updated_matrice()
-    print("Pas d'erreur.")
+# def main():
+#     print("Ce script sert à tester mon jeu.")
+#     test_creation_jeu()
+#     test_initialisation_cellules()
+#     test_nombre_voisins()
+#     test_updated_matrice()
+#     print("Pas d'erreur.")
 
-if __name__=='__main__' :
-    main()
+# if __name__=='__main__' :
+#     main()

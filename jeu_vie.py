@@ -85,7 +85,7 @@ def main() :
             strInput = input ("Insérer une cellule dans la grille au format '(i,j)', où i et j sont les coordonnées de ligne et de colonne de la cellule : ")
             objInput = literal_eval(strInput)
             if (type(objInput)==tuple and len(objInput)==2 and type(objInput[0])==int and type(objInput[1])==int):
-                if (objInput[0]<0 or objInput[0]>99 or objInput[1]<0 or objInput[1]>99):
+                if (objInput[0]<0 or objInput[0]>=taille_grille or objInput[1]<0 or objInput[1]>=taille_grille):
                     print("Les coordonnées d'une cellule doivent être compris entre 0 et "+str(taille_grille-1))
                 else :
                     cellules_initiales.append(objInput)
